@@ -2,20 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* body {
+  font-family: Inter;
+} */
+
+.flexCenter {
+  @apply flex justify-center items-center;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.flexStart {
+  @apply flex items-center justify-start;
+}
+.flexSubCenter {
+  @apply flex items-center gap-1;
+}
+
+.text-small {
+  @apply text-sm font-medium;
+}
+
+.paddings {
+  @apply lg:px-20 py-6 px-5;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+.navbar {
+  @apply py-5 px-8 border-b border-nav-border gap-4 text-gray-100;
+}
+
+.sidebar {
+  @apply w-64 py-5 px-4 rounded gap-4 bg-white text-gray-100 h-[700px];
+}
+.divider {
+  @apply h-11 w-px bg-gray-50;
+}
+
+.subheading {
+  @apply font-medium text-[16px] text-gray-200;
+}
+.white-subheading {
+  @apply font-medium text-[16px] text-white;
+}
+
+.card-img {
+  @apply h-[230px] w-[220px] rounded overflow-hidden;
+}
+
+.card-img img {
+  @apply object-cover object-center;
+}
+
+.card-divider {
+  @apply h-[1px] w-[100%] bg-gray-50;
 }

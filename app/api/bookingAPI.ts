@@ -1,12 +1,9 @@
 import { Activity, Hotel } from "@/constants/interface";
 import axios from "axios";
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_KEY = "2b9136ee90msh787b50f1c8628bcp12b0d5jsn90fbc0e12b83";
 const BASE_URL = "booking-com15.p.rapidapi.com";
 
-if (!API_KEY) {
-  throw new Error("API_KEY is missing in the environment variables.");
-}
 
 
 export const searchNewActivities = async (): Promise<Activity[]> => {

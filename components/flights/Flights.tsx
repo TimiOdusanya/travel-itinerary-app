@@ -82,7 +82,8 @@ const Flights = () => {
       </div>
 
       {flightsData > 0 ? (
-        <FlightCard />
+        // <FlightCard />
+        <></>
       ) : (
         <EmptyStateCard
           emptyImage={"/images/EmptyFlight.svg"}

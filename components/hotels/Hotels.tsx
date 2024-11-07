@@ -22,7 +22,8 @@ const Hotels = () => {
       </div>
 
       {flightsData > 0 ? (
-        <HotelCard />
+        // <HotelCard />
+        <></>
       ) : (
         <EmptyStateCard
           emptyImage={"/images/EmptyHotel.svg"}

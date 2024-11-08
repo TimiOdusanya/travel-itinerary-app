@@ -1,19 +1,42 @@
+import React from "react";
 
-import React from 'react';
-
-const FilterOptions: React.FC = () => {
+const FilterOptions = () => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex justify-between px-6 py-4 mt-2 text-[15px] font-extralight">
       <label className="flex items-center gap-2">
-        <input type="radio" name="filter" value="hotels" className="form-radio text-blue-500" />
+        <input
+          type="checkbox"
+          name="filter"
+          value="hotels"
+          className="form-checkbox text-blue-500 w-4 h-4"
+        />
+        <span>All</span>
+      </label>
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          name="filter"
+          value="hotels"
+          className="form-checkbox text-blue-500 w-4 h-4"
+        />
         <span>Hotels</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="radio" name="filter" value="activities" className="form-radio text-blue-500" />
+        <input
+          type="checkbox"
+          name="filter"
+          value="activities"
+          className="form-checkbox text-blue-500 w-4 h-4"
+        />
         <span>Activities</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="radio" name="filter" value="flights" className="form-radio text-blue-500" />
+        <input
+          type="checkbox"
+          name="filter"
+          value="flights"
+          className="form-checkbox text-blue-500 w-4 h-4"
+        />
         <span>Flights</span>
       </label>
     </div>

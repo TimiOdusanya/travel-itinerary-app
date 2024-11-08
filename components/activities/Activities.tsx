@@ -1,11 +1,21 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ActivityCard from "./ActivityCard";
 import EmptyStateCard from "../EmptyStateCard";
 import { PiRoadHorizonBold } from "react-icons/pi";
+import { Activity } from "@/constants/interface";
 
 const Activities = () => {
-  const flightsData = 0;
+  const [activities, setActivites] = useState<Activity[]>([]);
+
+  useEffect(() => {
+    const addedActivities = JSON.parse(
+      localStorage.getItem("addedActivities") || "[]"
+    );
+    setActivites(addedActivities);
+  }, []);
 
   return (
     <div className="bg-blue-300 p-4 rounded">
@@ -21,14 +31,26 @@ const Activities = () => {
         </Link>
       </div>
 
-      {flightsData > 0 ? (
-        // <ActivityCard />
-        <></>
+      {activities.length > 0 ? (
+          activities.map((activity) => (
+            <ActivityCard
+              key={activity.id}
+              cardImage={activity.primaryPhoto?.small}
+              cardTitle={activity.name}
+              description={activity.shortDescription}
+              currency={activity.representativePrice.currency}
+              price={activity.representativePrice.chargeAmount}
+              averageRatings={
+                activity.reviewsStats?.combinedNumericStats?.average
+              }
+              overallRating={activity.reviewsStats?.combinedNumericStats?.total}
+            />
+          ))
       ) : (
         <EmptyStateCard
-          emptyImage={"/images/EmptyActivity.svg"}
-          emptyLink={"/activities"}
-          emptyButton={"Add Activity"}
+          emptyImage="/images/EmptyActivity.svg"
+          emptyLink="/activities"
+          emptyButton="Add Activity"
         />
       )}
     </div>

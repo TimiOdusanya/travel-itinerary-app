@@ -8,10 +8,7 @@ import { BsChevronDown } from "react-icons/bs";
 import SearchBar from "./SearchBar";
 
 const Navbar = () => {
-  const handleAddToItinerary = (item: any) => {
-    // Implement your logic for adding to the itinerary
-    console.log(item);
-  };
+
 
   return (
     <nav className="navbar text-small">

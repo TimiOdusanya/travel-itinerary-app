@@ -1,71 +1,21 @@
-// "use client";
-
-// import { useState } from "react";
-// import SearchBar from "@/components/SearchBar";
-// import ItinerarySection from "@/components/ItinerarySection";
-
-// const Home = () => {
-//   const [hotels, setHotels] = useState<any[]>([]);
-//   const [flights, setFlights] = useState<any[]>([]);
-//   const [activities, setActivities] = useState<any[]>([]);
-
-//   const addItemToItinerary = (item: any) => {
-//     if (item.type === "hotel") {
-//       setHotels((prev) => [...prev, item]);
-//     } else if (item.type === "flight") {
-//       setFlights((prev) => [...prev, item]);
-//     } else {
-//       setActivities((prev) => [...prev, item]);
-//     }
-//   };
-
-//   const removeItem = (id: string, type: string) => {
-//     if (type === "hotel") {
-//       setHotels((prev) => prev.filter((item) => item.id !== id));
-//     } else if (type === "flight") {
-//       setFlights((prev) => prev.filter((item) => item.id !== id));
-//     } else {
-//       setActivities((prev) => prev.filter((item) => item.id !== id));
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <nav className="bg-gray-800 p-4 text-white">
-//         <SearchBar addItemToItinerary={addItemToItinerary} />
-//       </nav>
-
-//       <div className="max-w-screen-lg mx-auto mt-8">
-//         <ItinerarySection
-//           title="Hotels"
-//           items={hotels}
-//           removeItem={(id) => removeItem(id, "hotel")}
-//         />
-//         <ItinerarySection
-//           title="Flights"
-//           items={flights}
-//           removeItem={(id) => removeItem(id, "flight")}
-//         />
-//         <ItinerarySection
-//           title="Activities"
-//           items={activities}
-//           removeItem={(id) => removeItem(id, "activity")}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
+"use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FlightCard from "./FlightCard";
 import EmptyStateCard from "../EmptyStateCard";
 import { PiAirplaneInFlightBold } from "react-icons/pi";
+import { FlightData } from "@/constants/interface";
 
 const Flights = () => {
-  const flightsData = 0;
+  const [flights, setFlights] = useState<FlightData[]>([]);
+
+  useEffect(() => {
+    const addedFlights = JSON.parse(
+      localStorage.getItem("addedFlights") || "[]"
+    );
+    setFlights(addedFlights);
+  }, []);
 
   return (
     <div className="bg-gray-25 p-4 rounded">
@@ -81,14 +31,21 @@ const Flights = () => {
         </Link>
       </div>
 
-      {flightsData > 0 ? (
-        // <FlightCard />
-        <></>
+      {flights.length > 0 ? (
+        flights.map((flight, index) => (
+          <FlightCard
+            key={index}
+            cardImage={flight.logoUrl}
+            cardTitle={flight.name}
+            currency={flight.minPrice.currencyCode}
+            totalPrice={flight.minPrice.units}
+          />
+        ))
       ) : (
         <EmptyStateCard
-          emptyImage={"/images/EmptyFlight.svg"}
-          emptyLink={"/flights"}
-          emptyButton={"Add Flight"}
+          emptyImage="/images/EmptyFlight.svg"
+          emptyLink="/flights"
+          emptyButton="Add Flight"
         />
       )}
     </div>
@@ -96,3 +53,4 @@ const Flights = () => {
 };
 
 export default Flights;
+

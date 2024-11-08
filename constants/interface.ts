@@ -98,11 +98,12 @@ export interface Hotel {
 
 export interface MinPrice {
   currencyCode: string;
-  units: number;
+  units: string;
   nanos: number;
 }
 
 export interface FlightData {
+  id: string,
   name: string;
   logoUrl: string;
   iataCode: string;

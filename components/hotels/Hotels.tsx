@@ -1,11 +1,19 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HotelCard from "./HotelCard";
 import EmptyStateCard from "../EmptyStateCard";
 import { PiWarehouseBold } from "react-icons/pi";
+import { Hotel } from "@/constants/interface";
 
 const Hotels = () => {
-  const flightsData = 0;
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+
+  useEffect(() => {
+    const addedHotels = JSON.parse(localStorage.getItem("addedHotels") || "[]");
+    setHotels(addedHotels);
+  }, []);
 
   return (
     <div className="bg-gray-300 p-4 rounded">
@@ -21,9 +29,22 @@ const Hotels = () => {
         </Link>
       </div>
 
-      {flightsData > 0 ? (
-        // <HotelCard />
-        <></>
+      {hotels.length > 0 ? (
+        hotels.map((hotel) => (
+          <HotelCard
+            key={hotel.hotel_id}
+            cardImage={hotel.property.photoUrls[0]}
+            cardTitle={hotel.property.name}
+            address={hotel.property.countryCode}
+            currency={hotel.property.priceBreakdown.grossPrice.currency}
+            excludedPrice={hotel.property.priceBreakdown.excludedPrice.value}
+            grossPrice={hotel.property.priceBreakdown.grossPrice.value}
+            reviewScore={hotel.property.reviewScore}
+            reviewCount={hotel.property.reviewCount}
+            checkInDate={hotel.property.checkinDate}
+            checkOutDate={hotel.property.checkoutDate}
+          />
+        ))
       ) : (
         <EmptyStateCard
           emptyImage={"/images/EmptyHotel.svg"}

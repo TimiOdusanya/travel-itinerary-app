@@ -17,6 +17,28 @@ const Flights = () => {
     setFlights(addedFlights);
   }, []);
 
+  const handleToggleFlight = (flight: FlightData) => {
+    const addedFlights = JSON.parse(
+      localStorage.getItem("addedFlights") || "[]"
+    );
+
+    const isFlightInList = addedFlights.some(
+      (f: FlightData) => f.name === flight.name
+    );
+
+    let updatedFlights;
+    if (isFlightInList) {
+      updatedFlights = addedFlights.filter(
+        (f: FlightData) => f.name !== flight.name
+      );
+    } else {
+      updatedFlights = [...addedFlights, flight];
+    }
+
+    localStorage.setItem("addedFlights", JSON.stringify(updatedFlights));
+    setFlights(updatedFlights);
+  };
+
   return (
     <div className="bg-gray-25 p-4 rounded">
       <div className="flexBetween">
@@ -39,6 +61,8 @@ const Flights = () => {
             cardTitle={flight.name}
             currency={flight.minPrice.currencyCode}
             totalPrice={flight.minPrice.units}
+            isAdded={flights.some((f) => f.name === flight.name)}
+            onToggleFlight={() => handleToggleFlight(flight)}
           />
         ))
       ) : (
@@ -53,4 +77,3 @@ const Flights = () => {
 };
 
 export default Flights;
-

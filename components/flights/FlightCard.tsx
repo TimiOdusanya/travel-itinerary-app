@@ -1,24 +1,23 @@
 import React from "react";
-import Image from "next/image";
 import { IoIosClose } from "react-icons/io";
-import { IoLocationOutline } from "react-icons/io5";
-import { FaStar } from "react-icons/fa";
-import { PiClock } from "react-icons/pi";
-import { truncateText } from "../../utils/truncateText";
-import { ActivityCardProps, FlightCardProps, HotelCardProps } from "@/constants/interface";
 import {
   PiSuitcaseRolling,
   PiFilmSlateBold,
   PiForkKnifeBold,
   PiUsbBold,
+  PiPlus,
+  PiPlusBold,
 } from "react-icons/pi";
+import { FlightCardProps } from "@/constants/interface";
 
 const FlightCard = ({
   cardImage,
   cardTitle,
   currency,
   totalPrice,
-}: FlightCardProps) => {
+  isAdded,
+  onToggleFlight,
+}: FlightCardProps & { isAdded: boolean; onToggleFlight: () => void }) => {
   return (
     <div className="w-[100%] h-[260px] flex rounded overflow-hidden my-4">
       <div className="w-[97%] bg-white p-4 flex flex-col gap-4">
@@ -26,7 +25,6 @@ const FlightCard = ({
           <div className="flex items-center justify-center gap-4">
             <img src={cardImage} className="w-9 h-9" alt={"flight_img"} />
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-semibold m-0"></h3>
               <div className="text-xl font-semibold">
                 <span>{cardTitle}</span>
               </div>
@@ -50,7 +48,7 @@ const FlightCard = ({
               className="h-[100px] w-[340px]"
               alt={"flight_img"}
             />
-            <div className="flex flex-col justify-start items-centerr">
+            <div className="flex flex-col justify-start items-center">
               <span className="text-xl font-semibold">21:00</span>
               <span>Sun, 22 Aug</span>
             </div>
@@ -80,18 +78,26 @@ const FlightCard = ({
           </div>
         </div>
         <div className="card-divider" />
-
         <div className="flex justify-between text-sm font-medium text-blue-300">
           <div className="flex gap-4">
-            <span>Activity Details </span>
+            <span>Flight Details </span>
             <span>Price Details</span>
           </div>
           <span>Edit Details</span>
         </div>
       </div>
 
-      <div className="w-[3%] bg-red-50 flexCenter">
-        <IoIosClose size={32} color={"#9E0A05"} />
+      <div
+        className={`w-[3%] flexCenter cursor-pointer ${
+          isAdded ? "bg-red-50" : "bg-green-50"
+        }`}
+        onClick={onToggleFlight}
+      >
+        {isAdded ? (
+          <IoIosClose size={32} color={"#9E0A05"} />
+        ) : (
+          <PiPlusBold size={20} color={"#0A9E05"} />
+        )}
       </div>
     </div>
   );

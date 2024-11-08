@@ -15,6 +15,20 @@ const Hotels = () => {
     setHotels(addedHotels);
   }, []);
 
+  const toggleHotel = (hotel: Hotel) => {
+    const isAdded = hotels.find((h) => h.hotel_id === hotel.hotel_id);
+    let updatedHotels;
+    if (isAdded) {
+      // Remove hotel
+      updatedHotels = hotels.filter((h) => h.hotel_id !== hotel.hotel_id);
+    } else {
+      // Add hotel
+      updatedHotels = [...hotels, hotel];
+    }
+    setHotels(updatedHotels);
+    localStorage.setItem("addedHotels", JSON.stringify(updatedHotels));
+  };
+
   return (
     <div className="bg-gray-300 p-4 rounded">
       <div className="flexBetween">
@@ -43,6 +57,8 @@ const Hotels = () => {
             reviewCount={hotel.property.reviewCount}
             checkInDate={hotel.property.checkinDate}
             checkOutDate={hotel.property.checkoutDate}
+            isAdded={hotels.some((a) => a.property.name === hotel.property.name)}
+            onToggle={() => toggleHotel(hotel)}
           />
         ))
       ) : (

@@ -8,14 +8,36 @@ import { PiRoadHorizonBold } from "react-icons/pi";
 import { Activity } from "@/constants/interface";
 
 const Activities = () => {
-  const [activities, setActivites] = useState<Activity[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
     const addedActivities = JSON.parse(
       localStorage.getItem("addedActivities") || "[]"
     );
-    setActivites(addedActivities);
+    setActivities(addedActivities);
   }, []);
+
+  const handleToggleActivity = (activity: Activity) => {
+    const addedActivities = JSON.parse(
+      localStorage.getItem("addedActivities") || "[]"
+    );
+
+    const isActivityInList = addedActivities.some(
+      (a: Activity) => a.name === activity.name
+    );
+
+    let updatedActivities;
+    if (isActivityInList) {
+      updatedActivities = addedActivities.filter(
+        (a: Activity) => a.name !== activity.name
+      );
+    } else {
+      updatedActivities = [...addedActivities, activity];
+    }
+
+    localStorage.setItem("addedActivities", JSON.stringify(updatedActivities));
+    setActivities(updatedActivities);
+  };
 
   return (
     <div className="bg-blue-300 p-4 rounded">
@@ -32,20 +54,22 @@ const Activities = () => {
       </div>
 
       {activities.length > 0 ? (
-          activities.map((activity) => (
-            <ActivityCard
-              key={activity.id}
-              cardImage={activity.primaryPhoto?.small}
-              cardTitle={activity.name}
-              description={activity.shortDescription}
-              currency={activity.representativePrice.currency}
-              price={activity.representativePrice.chargeAmount}
-              averageRatings={
-                activity.reviewsStats?.combinedNumericStats?.average
-              }
-              overallRating={activity.reviewsStats?.combinedNumericStats?.total}
-            />
-          ))
+        activities.map((activity) => (
+          <ActivityCard
+            key={activity.id}
+            cardImage={activity.primaryPhoto?.small}
+            cardTitle={activity.name}
+            description={activity.shortDescription}
+            currency={activity.representativePrice.currency}
+            price={activity.representativePrice.chargeAmount}
+            averageRatings={
+              activity.reviewsStats?.combinedNumericStats?.average
+            }
+            overallRating={activity.reviewsStats?.combinedNumericStats?.total}
+            isAdded={activities.some((a) => a.name === activity.name)}
+            onToggleActivity={() => handleToggleActivity(activity)}
+          />
+        ))
       ) : (
         <EmptyStateCard
           emptyImage="/images/EmptyActivity.svg"

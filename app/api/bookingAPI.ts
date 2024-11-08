@@ -2,7 +2,7 @@ import { flightData, hotelData, activitiesData } from "@/constants/data";
 import { Activity, Hotel } from "@/constants/interface";
 import axios from "axios";
 
-const API_KEY = "2b9136ee90msh787b50f1c8628bcp12b0d5jsn90fbc0e12b83";
+const API_KEY = "75381c4b3dmshd55c48fccf5f60ep19523cjsn4aa5a2595ee3";
 // const API_KEY = "";
 const BASE_URL = "booking-com15.p.rapidapi.com";
 

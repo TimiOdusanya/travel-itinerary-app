@@ -32,6 +32,8 @@ export interface ActivityCardProps {
   price: number;
   averageRatings: number;
   overallRating: number;
+  isAdded?: boolean;
+  onToggleActivity?: () => void;
 }
 
 export interface HotelCardProps {
@@ -45,6 +47,8 @@ export interface HotelCardProps {
   reviewCount: number;
   checkInDate: string;
   checkOutDate: string;
+  isAdded?: boolean;
+  onToggle?: () => void;
 }
 
  export interface Activity {
@@ -116,4 +120,6 @@ export interface FlightCardProps {
   cardTitle: string;
   currency: string;
   totalPrice: string;
+  isAdded?: boolean;
+  onToggleFlight?: () => void;
 }

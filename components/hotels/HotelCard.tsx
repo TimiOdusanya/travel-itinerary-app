@@ -18,9 +18,9 @@ const HotelCard = ({
   reviewCount,
   checkInDate,
   checkOutDate,
-  isAdded,
-  onToggle,
-}: HotelCardProps & { isAdded: boolean; onToggle: () => void }) => {
+  isAdded = false,
+  onToggle = () => {},
+}: HotelCardProps & { isAdded?: boolean; onToggle?: () => void }) => {
   return (
     <div className="w-[100%] h-[260px] flex rounded overflow-hidden my-4">
       <div className="w-[97%] bg-white p-4 flex gap-4">
@@ -70,12 +70,22 @@ const HotelCard = ({
           <div className="flex justify-between py-2">
             <div className="flex gap-4 text-gray-100 text-sm font-medium">
               <span>Facilities: </span>
-              <span className='flexCenter gap-1'><PiSwimmingPoolBold size={16}/> Pool</span>
-              <span className='flexCenter gap-1'><PiWineBold size={16}/> Bar</span>
+              <span className="flexCenter gap-1">
+                <PiSwimmingPoolBold size={16} /> Pool
+              </span>
+              <span className="flexCenter gap-1">
+                <PiWineBold size={16} /> Bar
+              </span>
             </div>
             <div className="flexCenter gap-4 text-gray-100 text-sm font-medium">
-              <span className='flexCenter gap-1'><PiCalendarBlank size={16} />Check In: {checkInDate}</span>
-              <span className='flexCenter gap-1'><PiCalendarBlank size={16}/>Check Out: {checkOutDate}</span>
+              <span className="flexCenter gap-1">
+                <PiCalendarBlank size={16} />
+                Check In: {checkInDate}
+              </span>
+              <span className="flexCenter gap-1">
+                <PiCalendarBlank size={16} />
+                Check Out: {checkOutDate}
+              </span>
             </div>
           </div>
           <div className="card-divider" />

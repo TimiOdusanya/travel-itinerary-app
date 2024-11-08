@@ -17,8 +17,8 @@ const ActivityCard = ({
   averageRatings,
   overallRating,
   isAdded,
-  onToggleActivity,
-}: ActivityCardProps & { isAdded: boolean; onToggleActivity: () => void }) => {
+  onToggleActivity = () => {},
+}: ActivityCardProps & { isAdded?: boolean; onToggleActivity?: () => void }) => {
   return (
     <div className="w-[100%] h-[260px] flex rounded overflow-hidden my-4">
       <div className="w-[97%] bg-white p-4 flex gap-4">

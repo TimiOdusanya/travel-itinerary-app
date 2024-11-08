@@ -15,9 +15,9 @@ const FlightCard = ({
   cardTitle,
   currency,
   totalPrice,
-  isAdded,
-  onToggleFlight,
-}: FlightCardProps & { isAdded: boolean; onToggleFlight: () => void }) => {
+  isAdded = false,
+  onToggleFlight = () => {},
+}: FlightCardProps & { isAdded?: boolean; onToggleFlight?: () => void }) => {
   return (
     <div className="w-[100%] h-[260px] flex rounded overflow-hidden my-4">
       <div className="w-[97%] bg-white p-4 flex flex-col gap-4">
